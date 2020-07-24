@@ -1,0 +1,17 @@
+.fields {
+  display: block;
+  margin-bottom: 10px;
+
+  label {
+    
+  }
+
+  .field_with_errors {
+    display: inline-block;
+
+    input {
+      border: 2px red solid;
+      border-radius: 2px;
+    }
+  }
+}
