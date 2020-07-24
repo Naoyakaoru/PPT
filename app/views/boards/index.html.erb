@@ -13,5 +13,10 @@
       <li><%= board.title %></li>
     <% end %>
   </ul>
+    <ul>
+    <% @boards.each do |board| %>
+      <li><%= board.intro %></li>
+    <% end %>
+  </ul>
 
 </body>
