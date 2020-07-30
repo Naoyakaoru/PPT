@@ -1,0 +1,9 @@
+<h1 class="post-title">
+  <%= @post.title %>
+</h1>
+<p class="post-content">
+  <%= @post.content %>
+</p>
+
+回到看板
+<%= link_to @board.title, board_path(@board) %>
