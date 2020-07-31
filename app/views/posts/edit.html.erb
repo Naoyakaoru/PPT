@@ -1,0 +1,24 @@
+<%= link_to "取消", board_path(@board) %>
+<h1>編輯文章</h1>
+<% post = @post %>
+<% if post.errors.any?  %>
+  <ul>
+  <% post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: post, url: post_path) do |form| %>
+  <div class="fields">
+    <%= form.label :title, "文章名稱" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="fields">
+    <%= form.label :content, "文章內容" %>
+    <%= form.text_area :content %>
+  </div>
+  
+  <%= form.submit "存擋" %>
+<% end %>
