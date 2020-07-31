@@ -1,7 +1,13 @@
 * {
-
+  list-style: none;
 }
 a, a:hover {
   color: inherit;
   text-decoration: none;
+}
+a:hover {
+  color: inherit
+}
+.board-btn {
+  border: #ccc 1px solid;
 }

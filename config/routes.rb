@@ -5,4 +5,15 @@ Rails.application.routes.draw do
   resources :boards do
     resources :posts, shallow: true
   end
+  resources :users, only: [:create] do #想要有自己的網址，就可以把:new刪掉，自己在下面建立
+    collection do
+      get :sign_up
+      get :edit
+      patch :update
+      get :sign_in
+      post :login
+      delete :sign_out #也可以用get, 但可以想成是刪除session
+    end
+  end
+
 end

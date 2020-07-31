@@ -1,14 +1,33 @@
-<h1>看板</h1>
-<a href="/boards/new">新增看板1</a>
-<a href="<%= new_board_path %>">新增看板2</a>
-<%= link_to "新增看板3", new_board_path %>
-
-<ul>
-  <% @boards.each do |board| %>
-    <li>
-      <%= link_to board.title, board_path(board) %>
-      <%= link_to "編輯", edit_board_path(board) %>
-      <%= link_to "刪除", board_path(board), method: 'delete', data: { confirm: '確定刪除？' } %>
-    </li>
-  <% end %>
-</ul>
+<div class="container">
+  <h1 class="text-center">所有看板</h1>
+  <%= link_to "新增看板", new_board_path %>
+  
+  <div class="row">
+    <% @boards.each do |board| %>
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <%= link_to board_path(board) do %> 
+              <div class="words">
+                <h2 class="card-title h4">
+                  <%= board.title %> 
+                </h2>
+                <p class="card-text">
+                  <%= board.intro %>
+                </p>
+              </div>
+            <% end %>
+            <div class="links pt-4">
+              <%= link_to edit_board_path(board) do %> 
+                <i class="fa fa-pen btn btn-light btn-sm"></i>
+              <% end %>
+              <%= link_to board_path(board), method: 'delete', data: { confirm: '確定刪除？' } do %> 
+                <i class="fa fa-trash btn btn-light btn-sm"></i>
+              <% end %>
+            </div>
+          </div>
+        </div> 
+      </div>
+    <% end %>
+  </div>
+</div>
