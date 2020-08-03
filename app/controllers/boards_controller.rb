@@ -9,7 +9,11 @@ class BoardsController < ApplicationController
   end
 
   def new
-    @board = Board.new #因為new有帶入預設值，所以變數不夠也沒關係
+    if user_signed_in?
+      @board = Board.new #因為new有帶入預設值，所以變數不夠也沒關係
+    else
+      redirect_to root_path, notice: "請先登入會員"
+    end
   end
 
   def create
@@ -49,15 +53,6 @@ class BoardsController < ApplicationController
 
   def board_params
     params.require(:board).permit(:title, :intro) #沒有寫的就會被濾掉
-  end
-
-  def filter_user
-    if user_signed_in?
-    
-    else
-      redirect_to root_path, notice: "請先登入會員"
-    end
-    
   end
 
 end
