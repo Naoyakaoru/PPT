@@ -18,8 +18,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= notice %>
+    <%= render "shared/frontend/navbar" %>
+    <%= render "shared/common/flash" %>
     <%= yield %>
+    <%= render "shared/frontend/footer" %>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
