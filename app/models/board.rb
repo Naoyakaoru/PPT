@@ -4,6 +4,8 @@ class Board < ApplicationRecord
   validates :title, presence: true, length: { minimum: 2 }
 
   has_many :posts
+  has_many :board_masters
+  has_many :users, through: :board_masters
 
   default_scope { where(deleted_at: nil) }
 

@@ -2,6 +2,9 @@
 <h1>
   看板 <%= @board.title %>
 </h1>
+<div class="bm">
+  [版主：<%= display_bm(@board) %>]
+</div>
   <%= link_to "新增文章", new_board_post_path(@board) %>
   <ul>
   <% @board.posts.each do |post| %>

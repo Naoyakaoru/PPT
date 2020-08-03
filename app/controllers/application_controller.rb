@@ -20,4 +20,9 @@ class ApplicationController < ActionController::Base
   def not_found
     render file: '/public/404.html', status: 404
   end
+
+  def authenticate_user!
+    redirect_to root_path, notice: "請登入會員" if not user_signed_in?
+  end
+
 end
