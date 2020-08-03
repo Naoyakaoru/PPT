@@ -8,8 +8,4 @@ module UsersHelper
       User.find(session[:user_token])
     end
   end
-
-  def logout
-    session[:user_token] 
-  end
 end

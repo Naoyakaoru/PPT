@@ -51,4 +51,13 @@ class BoardsController < ApplicationController
     params.require(:board).permit(:title, :intro) #沒有寫的就會被濾掉
   end
 
+  def filter_user
+    if user_signed_in?
+    
+    else
+      redirect_to root_path, notice: "請先登入會員"
+    end
+    
+  end
+
 end
