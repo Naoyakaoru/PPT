@@ -1,7 +1,7 @@
 <nav>
   <ul>
-    <% if session[:user_token] %>
-    <li><%= @current_user.account %></li> 
+    <% if user_signed_in? %>
+    <li><%= current_user.account %></li> 
     <li>登出</li>
     <% else %>
     <li>登入</li>
