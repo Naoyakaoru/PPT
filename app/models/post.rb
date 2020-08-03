@@ -4,10 +4,11 @@ class Post < ApplicationRecord
 
   belongs_to :board
 
-  before_create :create_serial
+  before_create :create_serial #before_validation -> 須確認是否是新資料
 
   private
   def create_serial
+    puts "-----"
     self.serial = serial_generator(10)
   end
 

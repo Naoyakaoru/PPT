@@ -3,9 +3,7 @@ module BoardsHelper
     if board.users.count == 0
       "徵求中"
     else
-      board.users.each do |user|
-        return user.account
-      end
+      board.users.map { |user| user.account }.join(" / ")
     end
   end
 end

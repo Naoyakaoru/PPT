@@ -5,5 +5,5 @@
   <%= @post.content %>
 </p>
 
-回到看板
-<%= link_to @board.title, board_path(@board) %>
+
+<%= link_to "回到看板" + @board.title, board_path(@board) %>

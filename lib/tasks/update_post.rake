@@ -5,7 +5,7 @@ namespace :db do
     puts " updating "
     puts "----------"
     Post.where(serial: nil).each do |p|
-      p.update(serial: serial_generator(10))
+      p.update!(serial: serial_generator(10))
       print "."
     end
      puts "All Done!"
