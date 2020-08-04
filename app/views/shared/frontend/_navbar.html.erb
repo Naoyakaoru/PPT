@@ -1,10 +1,13 @@
-<nav>
-  <ul>
+<nav class="position-relative">
+  <h1 class="col top-banner text-color-yellow bgc-blue text-center">
+    批批踢實業坊
+  </h1>
+  <ul class="login position-absolute d-flex justify-content-end text-color-white">
     <% if user_signed_in? %>
-    <li><%= current_user.account %></li> 
+    <li class="mr-3">Hi~ <%= current_user.account %></li> 
     <li><%= link_to "登出", sign_out_users_path, method: 'delete' %></li>
     <% else %>
-    <li><%= link_to "登入", sign_in_users_path %></li>
+    <li class="mr-3"><%= link_to "登入", sign_in_users_path %></li>
     <li><%= link_to "註冊", sign_up_users_path %></li>
     <% end %>
   </ul>
