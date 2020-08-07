@@ -1,0 +1,11 @@
+<h1>我的最愛</h1>
+
+<% if @boards.any? %>
+  <ul>
+    <% @boards.each do |board| %>
+      <li><%= link_to board.title, board_path(board) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <span>目前無任何看板</span>
+<% end %>

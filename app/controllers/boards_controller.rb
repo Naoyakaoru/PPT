@@ -2,7 +2,7 @@ class BoardsController < ApplicationController
   # app/views/layouts/boards.html.erb
   # 若找不到則往上
   # app/views/layouts/application.html.erb
-  before_action :find_board, only: [:show, :edit, :update, :destroy]
+  before_action :find_board, only: [:favorite, :show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -11,6 +11,11 @@ class BoardsController < ApplicationController
 
   def show
     @post = @board.posts.includes(:user)
+  end
+
+  def favorite
+    current_user.favorited_boards << @board
+    redirect_to favorites_path, notice: 'OK!'
   end
 
   def new

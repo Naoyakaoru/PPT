@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :board_masters
   has_many :boards, through: :board_masters
   has_many :posts
+  
+  has_many :favorite_boards
+  has_many :favorited_boards, through: :favorite_boards, source: :board
 
 
   def self.login(options)
