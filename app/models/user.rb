@@ -20,6 +20,14 @@ class User < ApplicationRecord
   end
   #User.login
 
+  def toggle_favorite_board(board)
+    if favorited_boards.exists?(board.id)
+      favorited_boards.destroy(board)
+    else
+      favorited_boards << board
+    end
+  end
+
   private
   def encrypt_password
     self.password = wara(self.password)

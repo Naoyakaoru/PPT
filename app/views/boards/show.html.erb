@@ -2,7 +2,11 @@
 <h1>
   看板 <%= @board.title %>
   <%= link_to favorite_board_path(@board), method: 'post' do %>
-    <i class="fa fa-heart-o small"></i>
+    <% if current_user.favorited_boards.exists? %>
+      <i class="fa fa-heart small"></i>
+    <% else %>
+      <i class="fa fa-heart-o small"></i>
+    <% end %>
   <% end %>
 </h1>
 <div class="bm">
