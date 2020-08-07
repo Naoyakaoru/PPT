@@ -1,9 +1,38 @@
-<h1 class="post-title">
-  <%= @post.title %>
-</h1>
+<div class="container">
+  <div class="row justify-content-between">
+    <div class="post-header-left d-flex">
+      <ul class="px-2">
+        <li>作者</li>
+        <li>標題</li>
+        <li>時間</li>
+      </ul>
+      <ul class="px-2">
+        <li><%= @post.display_user_name %></li>
+        <li class="post-title"><%= @post.title %></li>
+        <li><%= @post.created_at %></li>
+      </ul>
+    </div>
+    <div class="post-header-right d-flex">
+      <ul class="px-2">
+        <li>看板</li>
+      </ul>
+      <ul class="px-2">
+        <li><%= @board.title %></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <p class="post-content">
   <%= @post.content %>
 </p>
 
-
-<%= link_to "回到看板" + @board.title, board_path(@board) %>
+<ul>
+  <li>
+    <%= link_to "編輯",  edit_post_path(@post) %>
+  </li>
+  <li>
+    <%= link_to "刪除", post_path(@post), method: 'delete', data: { confirm: '確定刪除？' } %>
+  </li>
+</ul>
+<span><%= link_to "回到看板" + @board.title, board_path(@board) %></span>

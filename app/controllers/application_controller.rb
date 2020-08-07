@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
   helper_method :user_signed_in?, :current_user #提供方法給view用
   # before_action :find_user
 
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    render file: '/public/404.html', status: 404
+    render file: '/public/404.html', status: 404, layout: false #不要套用公版layout, 因為會有navbar
   end
 
   def authenticate_user!

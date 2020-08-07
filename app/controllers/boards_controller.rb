@@ -9,6 +9,10 @@ class BoardsController < ApplicationController
     @boards = Board.all
   end
 
+  def show
+    @post = @board.posts.includes(:user)
+  end
+
   def new
     if user_signed_in?
       @board = Board.new #因為new有帶入預設值，所以變數不夠也沒關係
@@ -39,7 +43,6 @@ class BoardsController < ApplicationController
     else
       render :edit, alert: "更新失敗" #會重新產生new頁面，且會有board_params的參數帶入原本的form (form_for的設計)
     end
-
   end
 
   def destroy

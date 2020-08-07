@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   before_action :find_board, only: [:new, :create]
-  before_action :find_post, only: [:show, :edit, :update]
-  before_action :find_board_by_post, only: [:edit, :show, :update]
-  
+  before_action :find_post, only: [:show]
+  before_action :find_board_by_post, only: [:show]
+  before_action :authenticate_user!, except: [:index, :show]
+
+
   def index
     @posts = Post.all
   end
@@ -22,13 +24,18 @@ class PostsController < ApplicationController
   end
 
   def edit
+    # @post = Post.find_by(id: params[:id], user: current_user) 
+    @post = current_user.posts.find(params[:id])
+    @board = Board.find(@post.board_id)
   end
 
   def update
+    @post = current_user.posts.find(params[:id])
+    @board = Board.find(@post.board_id)
     if @post.update(post_params)
-      redirect_to @board, notice: '文章新增成功'
+      redirect_to @post, notice: '文章更新成功'
     else
-      render :new, alert: "文章新增失敗" #會重新產生new頁面，且會有board_params的參數帶入原本的form (form_for的設計)
+      render :edit, alert: "文章更新失敗" #會重新產生edit頁面，且會有board_params的參數帶入原本的form (form_for的設計)
     end
   end
 
@@ -50,6 +57,9 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post)
+          .permit(:title, :content)
+          .merge(user: current_user) #belongs_to 產生的user，此處只是產生一個hash欄位而已
+          #有或沒有!都沒差, 因為此處只要回傳結果
   end
 end
