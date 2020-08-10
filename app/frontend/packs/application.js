@@ -3,7 +3,10 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+
 const images = require.context('../images', true)
 const imagePath = (name) => images(name, true)
 
-console.log(1234555)
+require("scripts");
+require("stylesheets");
+// require("bootstrap")
