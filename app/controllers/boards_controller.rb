@@ -18,7 +18,7 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to board_path, notice: 'OK!' }
-      format.json { render json: { status: @board.favorited_by?(current_user) }} #此方法寫在board上
+      format.json { render json: { status: @board.favorited_by?(current_user) }} #此方法寫在board model上
     # else  
     #   format.html {}
     #   format.json {}
