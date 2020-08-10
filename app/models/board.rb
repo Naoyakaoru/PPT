@@ -16,4 +16,9 @@ class Board < ApplicationRecord
     update(deleted_at: Time.now)
   end
 
+  def favorited_by?(u)
+    favorited_users.include?(u)
+  end
+
+
 end

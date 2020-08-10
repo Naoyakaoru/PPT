@@ -1,3 +1,9 @@
-<span><%= link_to "取消", board_path(@board) %></span>
-<h1>新增文章</h1>
-<%= render 'form', post: @post %>
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <span><%= link_to "取消", board_path(@board) %></span>
+      <h1>新增文章</h1>
+      <%= render 'form', post: @post %>
+    </div>
+  </div>
+</div>

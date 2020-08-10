@@ -1,21 +1,27 @@
-<% if post.errors.any?  %>
-  <ul>
-  <% post.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-  <% end %>
-  </ul>
-<% end %>
-
-<%= form_with(model: post, url: board_posts_path, local: true) do |form| %>
-  <div class="fields">
-    <%= form.label :title, "文章名稱" %>
-    <%= form.text_field :title %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col text-center">
+      <% if post.errors.any?  %>
+        <ul>
+        <% post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      <% end %>
+      
+      <%= form_with(model: post, url: board_posts_path, local: true) do |form| %>
+        <div class="fields text-color-grey">
+          <%= form.label :title, "文章名稱" %>
+          <%= form.text_field :title %>
+        </div>
+      
+        <div class="fields text-color-grey">
+          <%= form.label :content, "文章內容" %>
+          <%= form.text_area :content %>
+        </div>
+        
+        <%= form.submit "發文" %>
+      <% end %>
+    </div>
   </div>
-
-  <div class="fields">
-    <%= form.label :content, "文章內容" %>
-    <%= form.text_area :content %>
-  </div>
-  
-  <%= form.submit "發文" %>
-<% end %>
+</div>

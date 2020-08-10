@@ -1,13 +1,13 @@
 <span><%= link_to "返回全部看板", boards_path %></span>
-<h1>
+<h1 data-controller="heart" data-heart-board-id="<%= @board.id %>">
   看板 <%= @board.title %>
-  <%= link_to favorite_board_path(@board), method: 'post' do %>
-    <% if current_user.favorited_boards.exists? %>
-      <i class="fas fa-heart small"></i>
-    <% else %>
-      <i class="far fa-heart small"></i>
-    <% end %>
-  <% end %>
+    <span class="text-color-white" data-action="click->heart#favorite">
+      <% if current_user.favorited_boards.exists? %>
+        <i class="fas fa-heart small" data-target="heart.heart"></i>
+       <% else %>
+         <i class="far fa-heart small"></i>
+       <% end %> 
+    </span>
 </h1>
 <div class="bm">
   <span>[版主：<%= display_bm(@board) %>]</span>

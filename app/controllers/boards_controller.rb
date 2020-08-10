@@ -15,7 +15,16 @@ class BoardsController < ApplicationController
 
   def favorite
     current_user.toggle_favorite_board(@board)
-    redirect_to board_path
+
+    respond_to do |format|
+      format.html { redirect_to board_path, notice: 'OK!' }
+      format.json { render json: { status: @board.favorited_by?(current_user) }} #此方法寫在board上
+    # else  
+    #   format.html {}
+    #   format.json {}
+    end
+
+    # redirect_to board_path
     # redirect_to favorites_path, notice: 'OK!'
   end
 
