@@ -4,6 +4,7 @@ class Post < ApplicationRecord
 
   belongs_to :board
   belongs_to :user
+  has_many :comments
 
   before_create :create_serial #before_validation -> 須確認是否是新資料
 

@@ -21,18 +21,49 @@
       </ul>
     </div>
   </div>
+  <div class="row">
+    <p class="post-content">
+      <%= @post.content %>
+    </p>
+  </div>
+  <div class="row">
+    <ul class="px-2">
+      <li>
+        <span><%= link_to "回到看板" + @board.title, board_path(@board) %></span>
+      </li>
+      <li>
+        <%= link_to "編輯",  edit_post_path(@post) %>
+      </li>
+      <li>
+        <%= link_to "刪除", post_path(@post), method: 'delete', data: { confirm: '確定刪除？' } %>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col px-2">
+      <%= form_with(model: @comment, url: post_comments_path(@post)) do |form| %>
+      <%= form.text_field :content %>
+      <%= form.submit "送出" %>
+      <% end %>
+    </div>
+  </div>
+  <% @comments.each do |comment| %>
+    <div class="row">
+      <div class="post-comment col-2 px-2 d-flex justify-content-between">
+        <div class="post-comments-account text-color-yellow">
+          <%= comment.user.account %>
+        </div>
+        <span class="text-color-yellow">：</span>
+      </div>
+      <div class="text-color-grey col-5 px-2">
+        <%= comment.content %>
+      </div>
+      <div class="text-color-grey col-2 px-2">
+        <%= comment.ip_address %>
+      </div>
+      <div class="text-color-grey col-3 px-2 text-right">
+        <%= comment.created_at.in_time_zone("Taipei").strftime('%m/%d %H:%M') %>
+      </div>
+    </div>
+  <% end %>
 </div>
-
-<p class="post-content">
-  <%= @post.content %>
-</p>
-
-<ul>
-  <li>
-    <%= link_to "編輯",  edit_post_path(@post) %>
-  </li>
-  <li>
-    <%= link_to "刪除", post_path(@post), method: 'delete', data: { confirm: '確定刪除？' } %>
-  </li>
-</ul>
-<span><%= link_to "回到看板" + @board.title, board_path(@board) %></span>

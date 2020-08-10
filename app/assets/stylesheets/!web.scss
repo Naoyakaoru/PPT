@@ -36,3 +36,7 @@ a:hover {
 .top-banner {
   font-size: 24px;
 }
+.post-comments-account::before {
+  content: '→';
+  color: red;
+}

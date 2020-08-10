@@ -40,8 +40,10 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment = @post.comments.new
+    @comments = @post.comments.all.order(id: :desc)
   end
-
+  
   private
   def find_post
     @post = Post.find(params[:id])

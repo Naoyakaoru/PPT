@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root "pages#index"
   get "/about", to: "pages#about"
   resources :boards do
-    resources :posts, shallow: true
+    resources :posts, shallow: true do
+      resources :comments, shallow: true, only: [:create]
+    end
 
     member do
       post :favorite
