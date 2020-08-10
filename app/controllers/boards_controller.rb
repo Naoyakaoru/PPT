@@ -15,7 +15,8 @@ class BoardsController < ApplicationController
 
   def favorite
     current_user.toggle_favorite_board(@board)
-    redirect_to favorites_path, notice: 'OK!'
+    redirect_to board_path
+    # redirect_to favorites_path, notice: 'OK!'
   end
 
   def new
