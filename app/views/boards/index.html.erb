@@ -1,7 +1,10 @@
 <div class="container">
   <h1 class="text-center">所有看板</h1>
   <span><%= link_to "新增看板", new_board_path %></span>
-  
+  <div id="board" class="row">
+    <Board></Board>
+  </div>
+
   <div class="row">
     <% @boards.each do |board| %>
       <div class="col-12 col-md-6 col-lg-3 mb-4">
