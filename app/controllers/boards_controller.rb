@@ -2,11 +2,11 @@ class BoardsController < ApplicationController
   # app/views/layouts/boards.html.erb
   # 若找不到則往上
   # app/views/layouts/application.html.erb
-  before_action :find_board, only: [:favorite, :show, :edit, :update, :destroy]
+  before_action :find_board, only: [:favorite, :show, :edit, :update, :destroy, :hide]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @boards = Board.all
+    @boards = Board.normal.page(params[:page]).per(4)
   end
 
   def show
@@ -65,6 +65,11 @@ class BoardsController < ApplicationController
     redirect_to boards_path, notice: "刪除成功"
   end
   
+  def hide
+    @board.hide! if @board.may_hide?
+    redirect_to boards_path, notice: "隱板成功"
+  end
+
   private
   def find_board
     @board = Board.find(params[:id])

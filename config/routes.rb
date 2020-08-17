@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     member do
       post :favorite
+      put :hide
     end
 
   end
