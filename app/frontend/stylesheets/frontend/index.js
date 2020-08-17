@@ -3,3 +3,4 @@ import "@fortawesome/fontawesome-free/css/all";
 
 import "./form";
 import "./web.scss";
+import "./paginate.scss";

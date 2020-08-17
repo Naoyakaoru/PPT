@@ -1,0 +1,32 @@
+<head>
+  <meta charset="utf-8">
+  <script src="https://js.braintreegateway.com/web/dropin/1.23.0/js/dropin.min.js"></script>
+</head>
+<body>
+  <h1>方案 <%= @plan.upcase %></h1>
+  <h2>價錢 <%= @price %></h2>
+
+<%= form_with(url: '/checkout', id:'payment_form', method: 'post', local: true) do %>
+  <div id="dropin-container"></div>
+  <button id="submit-button">付款</button>
+<% end %>
+
+  <script>
+    var button = document.querySelector('#submit-button');
+
+    braintree.dropin.create({
+      authorization: '<%= @token %>',
+      container: '#dropin-container'
+    }, 
+    function (createErr, instance) {
+      button.addEventListener('click', function (e) {
+        e.preventDefault(); //把原本button的行為停下來，改為以下自己寫的順序與方式
+        instance.requestPaymentMethod(function (err, payload) {
+          //console.log(payload.nonce) //取得nonce
+          const form = document.querySelector('#payment_form');
+          form.submit(); //官網第四步，method和url回該form_with設定
+        });
+      });
+    });
+  </script>
+</body>

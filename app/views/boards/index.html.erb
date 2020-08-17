@@ -1,6 +1,8 @@
 <div class="container">
   <h1 class="text-center">所有看板</h1>
+  <% if policy(:board).create? %>
   <span><%= link_to "新增看板", new_board_path %></span>
+  <% end %>
   <div id="board" class="row">
     <%# <Board></Board> %>
   </div>

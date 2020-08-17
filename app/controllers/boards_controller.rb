@@ -6,7 +6,7 @@ class BoardsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @boards = Board.normal.page(params[:page]).per(4)
+    @boards = Board.normal.page(params[:page]).per(2)
   end
 
   def show
@@ -34,11 +34,14 @@ class BoardsController < ApplicationController
     else
       redirect_to root_path, notice: "請先登入會員"
     end
+  
+    authorize @board, :new?
   end
 
   def create
     @board = Board.new(board_params)
-
+    @board.users << current_user
+    authorize @board, :create?
     if @board.save
       redirect_to boards_path, notice: "新增成功"
     else
