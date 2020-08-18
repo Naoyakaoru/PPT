@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_034627) do
+ActiveRecord::Schema.define(version: 2020_08_18_041030) do
 
   create_table "board_masters", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_034627) do
     t.integer "reply_id", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "state", default: "draft"
     t.index ["deleted_at"], name: "index_mailboxes_on_deleted_at"
     t.index ["reply_id"], name: "index_mailboxes_on_reply_id"
     t.index ["user_id"], name: "index_mailboxes_on_user_id"
