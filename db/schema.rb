@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_17_041805) do
+ActiveRecord::Schema.define(version: 2020_08_18_034627) do
 
   create_table "board_masters", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -53,6 +53,22 @@ ActiveRecord::Schema.define(version: 2020_08_17_041805) do
     t.index ["user_id"], name: "index_favorite_boards_on_user_id"
   end
 
+  create_table "mailboxes", force: :cascade do |t|
+    t.string "from"
+    t.string "title"
+    t.text "content"
+    t.string "ip_address"
+    t.datetime "read_at"
+    t.datetime "deleted_at"
+    t.integer "user_id", null: false
+    t.integer "reply_id", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["deleted_at"], name: "index_mailboxes_on_deleted_at"
+    t.index ["reply_id"], name: "index_mailboxes_on_reply_id"
+    t.index ["user_id"], name: "index_mailboxes_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -91,5 +107,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_041805) do
   add_foreign_key "comments", "users"
   add_foreign_key "favorite_boards", "boards"
   add_foreign_key "favorite_boards", "users"
+  add_foreign_key "mailboxes", "mailboxes", column: "reply_id"
+  add_foreign_key "mailboxes", "users"
   add_foreign_key "posts", "boards"
 end

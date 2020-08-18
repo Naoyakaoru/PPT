@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  require "net/http"
   include Pundit
 
   rescue_from Pundit::NotAuthorizedError, with: :not_authorized
@@ -30,6 +31,10 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     redirect_to root_path, notice: "請登入會員" if not user_signed_in?
+  end
+
+  def get_current_ip
+    @current_ip = Net::HTTP.get(URI("https://api.ipify.org"))
   end
 
 end

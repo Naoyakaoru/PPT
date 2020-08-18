@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "/payment", to: "pages#payment"
   post "/checkout", to: "pages#checkout"
 
+  resources :mailboxes
+
   resources :boards do
     resources :posts, shallow: true do
       resources :comments, shallow: true, only: [:create]
