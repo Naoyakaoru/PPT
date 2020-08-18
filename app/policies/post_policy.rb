@@ -6,4 +6,11 @@ class PostPolicy < ApplicationPolicy
       false
     end
   end
+  def destroy?(a)
+    if owner(a) || admin
+      true
+    else
+      false
+    end
+  end
 end
