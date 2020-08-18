@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  acts_as_paranoid
+
   validates :title, presence: true
   validates :serial, uniqueness: true
 

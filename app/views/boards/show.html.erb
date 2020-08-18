@@ -16,12 +16,17 @@
   <ul>
   <% @board.posts.each do |post| %>
     <li data-controller="post" data-action="heypost@window->post#callpost">
+      <% if post.deleted_at == nil %>
       <%= post.display_user_name %>  <%# 作用在post, 所以把display_user_name這個method寫在post %>
+      <% end %>
       <%= link_to post.title, post, data: { target: 'post.title' } %>
       <% if policy(:post).edit?(post) %>
         <%= link_to "編輯",  edit_post_path(post) %>
+      <% end %>
+      <% if policy(:post).destroy?(post) %>
         <%= link_to "刪除", post_path(post), method: 'delete', data: { confirm: '確定刪除？' } %>
       <% end %>
+
     </li>
   <% end %>
 </ul>

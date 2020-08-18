@@ -1,13 +1,18 @@
 class PostPolicy < ApplicationPolicy
-  def edit?(a)
-    if owner(a)
+  def update?(post)
+    if owner(post)
       true
     else
       false
     end
   end
-  def destroy?(a)
-    if owner(a) || admin
+
+  def edit?(post)
+    update?(post)
+  end
+  
+  def destroy?(post)
+    if owner(post) || admin
       true
     else
       false

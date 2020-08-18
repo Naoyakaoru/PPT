@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :find_board, only: [:new, :create]
-  before_action :find_post, only: [:show]
-  before_action :find_board_by_post, only: [:show]
+  before_action :find_post, only: [:show, :destroy]
+  before_action :find_board_by_post, only: [:show, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
 
@@ -37,6 +37,12 @@ class PostsController < ApplicationController
     else
       render :edit, alert: "文章更新失敗" #會重新產生edit頁面，且會有board_params的參數帶入原本的form (form_for的設計)
     end
+  end
+
+  def destroy
+    authorize @post
+    @post.destroy
+    redirect_to board_path(@board), notice: "刪除成功"
   end
 
   def show
