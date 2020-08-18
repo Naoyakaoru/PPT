@@ -43,3 +43,12 @@ a:hover {
   content: '→';
   color: red;
 }
+td, tr, ul, li{
+  color: #ccc;
+  padding: 0;
+}
+.pricing_table {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}

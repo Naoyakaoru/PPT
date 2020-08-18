@@ -11,28 +11,44 @@ class PagesController < ApplicationController
   def payment
     @token = gateway.client_token.generate
     @plan = params[:plan]
-    @price = case @plan
-    when "a"
-      5
-    when "b"
-      20
-    else
-      "參數錯誤"
-    end
+    @price = plan_price(@plan)
   end
 
   def checkout
-    render html:params
+    result = gateway.transaction.sale(
+      amount: plan_price(params[:plan]),
+      payment_method_nonce: params[:nonce],
+      options: {
+        submit_for_settlement: true
+      }
+    )
+
+    if result.success?
+      # 轉換角色
+      redirect_to root_path, notice: '感謝乾爹！'
+    else
+      redirect_to root_path, notice: '付款發生錯誤'
+    end
   end
 
   private
   def gateway
     Braintree::Gateway.new(
-      :environment => :sandbox,
-      :merchant_id => 'ycjkmy7b48842kvj',
-      :public_key => 'vcnsjmqndvvfb4ns',
-      :private_key => '0de124ef8baaa27de12d11d84b2e4f3a',
+      environment: :sandbox,
+      merchant_id: ENV["braintree_merchant_id"],
+      public_key: ENV["braintree_public_key"],
+      private_key: ENV["braintree_private_key"],
     )
   end
 
+  def plan_price(plan)
+    case plan
+    when "a"
+      ENV["plan_a_price"]
+    when "b"
+      ENV["plan_b_price"]
+    else
+      "參數錯誤"
+    end
+  end
 end

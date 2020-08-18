@@ -6,9 +6,10 @@
   <h1>方案 <%= @plan.upcase %></h1>
   <h2>價錢 <%= @price %></h2>
 
-<%= form_with(url: '/checkout', id:'payment_form', method: 'post', local: true) do %>
+<%= form_with(url: "/checkout?plan=#{@plan}", id: 'payment_form', method: 'post', local: true) do %>
   <div id="dropin-container"></div>
   <button id="submit-button">付款</button>
+  <input type="hidden" value="" id="nonce" name="nonce">
 <% end %>
 
   <script>
@@ -17,13 +18,15 @@
     braintree.dropin.create({
       authorization: '<%= @token %>',
       container: '#dropin-container'
-    }, 
-    function (createErr, instance) {
+    }, function (createErr, instance) {
       button.addEventListener('click', function (e) {
         e.preventDefault(); //把原本button的行為停下來，改為以下自己寫的順序與方式
+        
         instance.requestPaymentMethod(function (err, payload) {
           //console.log(payload.nonce) //取得nonce
+          const nonce_dom = document.querySelector('#nonce');
           const form = document.querySelector('#payment_form');
+          nonce_dom.value = payload.nonce; //把token塞改form
           form.submit(); //官網第四步，method和url回該form_with設定
         });
       });

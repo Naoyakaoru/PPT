@@ -1,22 +1,33 @@
 <h1>方案說明</h1>
-<table class="border-primary">
+<table class="pricing_table my-5">
   <thead>
-  </thead>
-  <tbody>
     <tr>
+      <td>免費會員</td>
       <td>Plan A</td>
       <td>Plan B</td>
     </tr>
+  </thead>
+  <tbody>
     <tr>
       <td><ul>
-        <li>Features:</li>
+      Features:
+        <li>不可新增看板</li>
         <li></li>
         <li></li>
         <li></li>
         <li></li>
       </ul></td>
       <td><ul>
-        <li>Features:</li>
+      Features:
+        <li>可新增2個看板</li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul></td>
+      <td><ul>
+      Features:
+        <li>可新增無限看板</li>
         <li></li>
         <li></li>
         <li></li>
@@ -24,6 +35,12 @@
       </ul></td>
     </tr>
     <tr>
+      <td>終身免費</td>
+      <td><%= ENV["plan_a_price"] %>元</td>
+      <td><%= ENV["plan_b_price"] %>元</td>
+    </tr>
+    <tr>
+      <td></td>
       <td><%= link_to "去結帳", payment_path(plan: 'a') %></td>
       <td><%= link_to "去結帳", payment_path(plan: 'b') %></td>
     </tr>
