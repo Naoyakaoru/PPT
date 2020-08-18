@@ -1,6 +1,6 @@
 class PostPolicy < ApplicationPolicy
   def update?(post)
-    if owner(post)
+    if owner_of?(post)
       true
     else
       false
@@ -12,7 +12,7 @@ class PostPolicy < ApplicationPolicy
   end
   
   def destroy?(post)
-    if owner(post) || admin
+    if owner_of?(post) || admin
       true
     else
       false

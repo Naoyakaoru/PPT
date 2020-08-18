@@ -6,6 +6,14 @@ class ApplicationPolicy
     @record = record
   end
 
+  def owner_of?(m)
+    if m.user == user
+      true
+    else
+      false
+    end
+  end
+
   def index?
     false
   end
@@ -58,10 +66,6 @@ class ApplicationPolicy
 
   def admin
     user && user.role == "admin"
-  end
-
-  def owner(content)
-    user && content.user == user
   end
 
 end

@@ -32,10 +32,14 @@
         <span><%= link_to "回到看板" + @board.title, board_path(@board) %></span>
       </li>
       <li>
-        <%= link_to "編輯",  edit_post_path(@post) %>
+        <% if policy(:post).edit?(@post) %>
+          <%= link_to "編輯",  edit_post_path(@post) %>
+        <% end %>
       </li>
       <li>
-        <%= link_to "刪除", post_path(@post), method: 'delete', data: { confirm: '確定刪除？' } %>
+        <% if policy(:post).destroy?(@post) %>
+          <%= link_to "刪除", post_path(@post), method: 'delete', data: { confirm: '確定刪除？' } %>
+        <% end %>
       </li>
     </ul>
   </div>

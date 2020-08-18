@@ -40,9 +40,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    authorize @post
-    @post.destroy
-    redirect_to board_path(@board), notice: "刪除成功"
+    if policy(:post).destroy?(@post)
+      @post.destroy
+      redirect_to board_path(@board), notice: "刪除成功"
+    else
+      redirect_to board_path(@board), notice: "您沒有權限"
+    end
   end
 
   def show
