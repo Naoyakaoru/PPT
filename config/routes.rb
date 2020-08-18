@@ -6,7 +6,16 @@ Rails.application.routes.draw do
   get "/payment", to: "pages#payment"
   post "/checkout", to: "pages#checkout"
 
-  resources :mailboxes
+  resources :mailboxes do
+    collection do
+      get :draft
+      get :sent
+    end
+
+    member do
+      post :send
+    end
+  end
 
   resources :boards do
     resources :posts, shallow: true do

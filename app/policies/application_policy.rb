@@ -59,4 +59,9 @@ class ApplicationPolicy
   def admin
     user && user.role == "admin"
   end
+
+  def owner(content)
+    user && content.user == user
+  end
+
 end
