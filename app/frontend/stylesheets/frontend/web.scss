@@ -24,6 +24,9 @@ a:hover {
 .text-color-yellow {
   color: yellow
 }
+.text-color-black {
+  color: black
+}
 .text-color-grey, li, span {
   color: #ccc
 }
@@ -51,4 +54,10 @@ td, tr, ul, li{
   margin: auto;
   width: 50%;
   text-align: center;
+}
+.post-content>img {
+  max-width: 100%;
+}
+.rich-text-field {
+  background-color: #fff;
 }

@@ -1,6 +1,6 @@
 <span><%= link_to "返回全部看板", boards_path %></span>
 <h1 data-controller="heart" data-heart-board-id="<%= @board.id %>">
-  看板 <%= @board.title %>
+  看板 <%= @board.title %><%= @intro.html_safe %>
     <span class="text-color-white" data-action="click->heart#favorite">
       <% if current_user.favorited_boards.exists? %>
         <i class="fas fa-heart small" data-target="heart.heart"></i>
@@ -9,6 +9,7 @@
        <% end %> 
     </span>
 </h1>
+<%= @intro.html_safe %>
 <div class="bm">
   <span>[版主：<%= display_bm(@board) %>]</span>
 </div>
@@ -26,7 +27,6 @@
       <% if policy(:post).destroy?(post) %>
         <%= link_to "刪除", post_path(post), method: 'delete', data: { confirm: '確定刪除？' } %>
       <% end %>
-
     </li>
   <% end %>
 </ul>

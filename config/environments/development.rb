@@ -5,6 +5,7 @@ Rails.application.configure do
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
+  config.hosts << "7302b392f1b8.ngrok.io"
 
   # Do not eager load code on boot.
   config.eager_load = false
@@ -59,4 +60,15 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.mailgun.org',
+    port:                 587,
+    domain:               'batonpie.com',
+    user_name:            ENV["mailgun_user_name"],
+    password:             ENV["mailgun_password"],
+    authentication:       'plain',
+    enable_starttls_auto: true
+  }
 end

@@ -19,6 +19,18 @@
           <%= form.label :content, "文章內容" %>
           <%= form.text_area :content %>
         </div>
+
+        <div class="fields text-color-grey">
+          <%= form.label :hello, "內文" %>
+          <div class="rich-text-field text-color-black text-left">
+            <%= form.rich_text_area :hello %>
+          </div>
+        </div>
+
+        <div class="fields text-color-grey">
+          <%= form.label :photo, "附件" %>
+          <%= form.file_field :photo %>
+        </div>
         
         <%= form.submit "發文" %>
       <% end %>

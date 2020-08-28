@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -33,10 +33,12 @@ gem 'kaminari'
 gem 'pundit', '~> 2.1'
 gem "braintree", "~> 2.102.0"
 gem 'figaro', '~> 1.2'
+gem 'redcarpet', '~> 3.5.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'hirb', '~> 0.7.3'
   gem 'hirb-unicode', '~> 0.0.5'
   gem 'rack-mini-profiler', '~> 2.0', '>= 2.0.3'
   end
@@ -49,6 +51,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'foreman', '~> 0.87.1'
+  gem 'letter_opener_web', '~> 1.4'
 end
 
 group :test do

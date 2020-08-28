@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   acts_as_paranoid
+  has_rich_text :hello
 
   validates :title, presence: true
   validates :serial, uniqueness: true
@@ -7,6 +8,7 @@ class Post < ApplicationRecord
   belongs_to :board
   belongs_to :user
   has_many :comments
+  has_one_attached :photo
 
   before_create :create_serial #before_validation -> 須確認是否是新資料
 

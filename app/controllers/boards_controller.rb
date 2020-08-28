@@ -6,11 +6,16 @@ class BoardsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @boards = Board.normal.page(params[:page]).per(2)
+    @boards = Board.normal.page(params[:page]).per(8)
   end
 
   def show
     @post = @board.posts.includes(:user)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+    filter_html: true,
+    autolink: true,
+    tables: true)
+    @intro = markdown.render(@board.intro)
   end
 
   def favorite

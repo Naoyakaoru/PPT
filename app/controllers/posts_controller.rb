@@ -17,6 +17,8 @@ class PostsController < ApplicationController
     @post = @board.posts.new(post_params)
 
     if @post.save
+      # UserMailer.with(user: @user).welcome_email.deliver_later
+      SendmailJob.perform_later(@post)
       redirect_to @board, notice: '文章新增成功'
     else
       render :new, alert: "文章新增失敗" #會重新產生new頁面，且會有board_params的參數帶入原本的form (form_for的設計)
@@ -69,7 +71,7 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post)
-          .permit(:title, :content)
+          .permit(:title, :content, :photo, :hello)
           .merge(user: current_user) #belongs_to 產生的user，此處只是產生一個hash欄位而已
           #有或沒有!都沒差, 因為此處只要回傳結果
   end
